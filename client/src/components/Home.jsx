@@ -12,6 +12,7 @@ export default function Home(){
 
     const dispatch = useDispatch()
     const allDogs = useSelector((state)=> state.dogs)
+    const filters = useSelector((state)=> state.filter)
 
     const [page,setPage] = useState(1)
     const dogsPerPage = 8
@@ -37,6 +38,7 @@ export default function Home(){
                 return(
                     <div>
                         <p>{el.name}</p>
+                        <p>{el.weight}</p>
                         <img src={el.image} alt="no imagen" />
                     </div>
                 )

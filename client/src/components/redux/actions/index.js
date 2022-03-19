@@ -1,4 +1,4 @@
-import { GET_ALL_DOGS } from "../constant";
+import { FILTER_SORT, GET_ALL_DOGS } from "../constant";
 import axios from 'axios'
 
 export function getAllDogs(){
@@ -9,4 +9,11 @@ export function getAllDogs(){
             payload: json.data
         })
     }
+}
+
+export function filterSort(payload){
+    return({
+        type: FILTER_SORT,
+        payload
+    })
 }
