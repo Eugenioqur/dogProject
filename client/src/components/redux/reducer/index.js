@@ -1,8 +1,9 @@
-import { FILTER_SORT, GET_ALL_DOGS } from "../constant"
+import { FILTER_SORT, FILTER_TEMPERAMENT, GET_ALL_DOGS, GET_ALL_TEMPERAMENTS } from "../constant"
 
 const initialState={
     dogs:[],
     allDogs:[],
+    temperaments:[],
     filter:''
 }
 
@@ -16,6 +17,12 @@ const rootReducer=(state=initialState,action)=>{
                 allDogs: action.payload
             }
 
+        case GET_ALL_TEMPERAMENTS:
+            return {
+                ...state,
+                temperaments:  action.payload,
+                }
+                
         case FILTER_SORT:
             let sortedArr = action.payload === 'az' ? state.allDogs.sort(function(a,b){
                 if (a.name>  b.name){
@@ -57,6 +64,30 @@ const rootReducer=(state=initialState,action)=>{
                 filter: action.payload
             }
 
+        case FILTER_TEMPERAMENT:
+            const dogs = state.allDogs;
+            const dogsFiltered = []
+
+            console.log(dogs[0].temperament)
+            for(let i=0;i < dogs.length; i++){
+                if (dogs[i].temperament){
+                    if(dogs[i].temperament.includes(action.payload)){
+                        dogsFiltered.push(dogs[i])
+                    }
+                }
+            }
+            if(dogsFiltered.length){
+                return{
+                    ...state,
+                    dogs : dogsFiltered
+                }
+            } else{
+                return{
+                    ...state,
+                    dogs: dogs
+                }
+            }
+            
         default:
             return state
     }

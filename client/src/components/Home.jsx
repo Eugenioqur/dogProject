@@ -34,6 +34,7 @@ export default function Home(){
             <NavBar/>
             <Link to='/create'><button>Create new dog</button></Link>
             <Paginated allDogs={allDogs.length} dogsPerPage = {dogsPerPage} pag = {pag} />
+            <h3>filter by:{filters}</h3>
             {currentDogs.map(el =>{
                 return(
                     <div>
@@ -43,7 +44,6 @@ export default function Home(){
                     </div>
                 )
             })}
-
             <Paginated 
             allDogs={allDogs.length} 
             dogsPerPage={dogsPerPage} 

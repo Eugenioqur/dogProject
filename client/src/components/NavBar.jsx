@@ -1,13 +1,24 @@
 import React from "react";
-import {useDispatch} from 'react-redux'
-import { filterSort } from "./redux/actions";
+import { useEffect } from "react";
+import {useDispatch,useSelector} from 'react-redux'
+
+import { filterSort, filterTemperament, getAllTemperaments } from "./redux/actions";
 
 export default function NavBar (){
     const dispatch = useDispatch()
+    const temperaments = useSelector((state)=>state.temperaments)
 
     function handleSort(e){
         dispatch(filterSort(e.target.value))
     }
+
+    function handleTemperament(e){
+        dispatch(filterTemperament(e.target.value))
+    }
+
+    useEffect(()=>{
+        dispatch(getAllTemperaments());
+    },[dispatch])
 
     return(
         <div>
@@ -21,6 +32,11 @@ export default function NavBar (){
                 <option>---</option>
                 <option value="az">A-Z</option>
                 <option value="za">Z-A</option>
+            </select>
+            <select onChange={ e => handleTemperament(e)}>
+                <option>---</option>
+                {temperaments.map((el)=>
+                (<option value={el.name}>{el.name}</option>))}
             </select>
         </div>
     )
