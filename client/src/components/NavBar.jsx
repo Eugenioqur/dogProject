@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import {useDispatch,useSelector} from 'react-redux'
 
 import { filterCreated, filterSort, filterTemperament, getAllTemperaments } from "./redux/actions";
+import SearchBar from "./SearchBar";
 
 export default function NavBar (){
     const dispatch = useDispatch()
@@ -26,6 +27,7 @@ export default function NavBar (){
 
     return(
         <div>
+            <SearchBar/>
             <h1>Hi, i'm NavBar</h1>
             <select onChange={ e => handleSort(e)}>
                 <option>---</option>

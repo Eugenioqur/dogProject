@@ -1,4 +1,4 @@
-import { FILTER_CREATED, FILTER_SORT, FILTER_TEMPERAMENT, GET_ALL_DOGS, GET_ALL_TEMPERAMENTS } from "../constant"
+import { FILTER_CREATED, FILTER_SORT, FILTER_TEMPERAMENT, GET_ALL_DOGS, GET_ALL_TEMPERAMENTS, SEARCH_DOGS } from "../constant"
 
 const initialState={
     dogs:[],
@@ -106,6 +106,12 @@ const rootReducer=(state=initialState,action)=>{
                     
                 default:
                     return state
+            }
+        
+        case SEARCH_DOGS:
+            return{
+                ...state,
+                dogs: action.payload
             }
         
         default:
