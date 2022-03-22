@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import {useDispatch,useSelector} from 'react-redux'
 
-import { filterSort, filterTemperament, getAllTemperaments } from "./redux/actions";
+import { filterCreated, filterSort, filterTemperament, getAllTemperaments } from "./redux/actions";
 
 export default function NavBar (){
     const dispatch = useDispatch()
@@ -14,6 +14,10 @@ export default function NavBar (){
 
     function handleTemperament(e){
         dispatch(filterTemperament(e.target.value))
+    }
+
+    function handleCreate(e){
+        dispatch(filterCreated(e.target.value))
     }
 
     useEffect(()=>{
@@ -37,6 +41,11 @@ export default function NavBar (){
                 <option>---</option>
                 {temperaments.map((el)=>
                 (<option value={el.name}>{el.name}</option>))}
+            </select>
+            <select onChange={ e => handleCreate(e)}>
+                <option>---</option>
+                <option value="api">from api</option>
+                <option value="db">from data base</option>
             </select>
         </div>
     )

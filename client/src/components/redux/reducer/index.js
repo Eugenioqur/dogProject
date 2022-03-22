@@ -1,4 +1,4 @@
-import { FILTER_SORT, FILTER_TEMPERAMENT, GET_ALL_DOGS, GET_ALL_TEMPERAMENTS } from "../constant"
+import { FILTER_CREATED, FILTER_SORT, FILTER_TEMPERAMENT, GET_ALL_DOGS, GET_ALL_TEMPERAMENTS } from "../constant"
 
 const initialState={
     dogs:[],
@@ -87,7 +87,27 @@ const rootReducer=(state=initialState,action)=>{
                     dogs: dogs
                 }
             }
-            
+        
+        case FILTER_CREATED:
+
+            switch(action.payload){
+                case 'api':
+                    const dogsFromApi = state.allDogs.filter((el)=> typeof el.id === 'number')
+                    return{
+                        ...state,
+                        dogs: dogsFromApi
+                    }
+                case 'db':
+                    const dogsFromDb = state.allDogs.filter((el)=> typeof el.id === 'string')
+                    return{
+                        ...state,
+                        dogs: dogsFromDb
+                    }
+                    
+                default:
+                    return state
+            }
+        
         default:
             return state
     }

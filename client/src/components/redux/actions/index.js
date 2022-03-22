@@ -1,4 +1,4 @@
-import { FILTER_SORT, FILTER_TEMPERAMENT, GET_ALL_DOGS, GET_ALL_TEMPERAMENTS } from "../constant";
+import { FILTER_CREATED, FILTER_SORT, FILTER_TEMPERAMENT, GET_ALL_DOGS, GET_ALL_TEMPERAMENTS } from "../constant";
 import axios from 'axios'
 
 export function getAllDogs(){
@@ -31,6 +31,13 @@ export function filterSort(payload){
 export function filterTemperament(payload){
     return({
         type: FILTER_TEMPERAMENT,
+        payload
+    })
+}
+
+export function filterCreated(payload){
+    return({
+        type: FILTER_CREATED,
         payload
     })
 }
