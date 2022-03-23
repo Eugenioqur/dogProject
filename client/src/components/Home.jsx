@@ -1,20 +1,21 @@
 import React from "react";
 import {Link} from 'react-router-dom'
-import {useState,useEffect} from 'react'
+import {useEffect} from 'react'
 import {useDispatch,useSelector} from 'react-redux'
 
-import { getAllDogs } from "./redux/actions";
+import { currentPage, getAllDogs } from "./redux/actions";
 
 import NavBar from "./NavBar";
 import Paginated from "./Paginated";
+import Card from "./Card";
 
 export default function Home(){
 
     const dispatch = useDispatch()
     const allDogs = useSelector((state)=> state.dogs)
     const filters = useSelector((state)=> state.filter)
+    const page = useSelector((state)=> state.page)
 
-    const [page,setPage] = useState(1)
     const dogsPerPage = 8
     const indexOfLastDog = page * dogsPerPage
     const indexOfFirstDog = indexOfLastDog - dogsPerPage
@@ -25,7 +26,7 @@ export default function Home(){
     },[dispatch])
     
     const pag = (pageNumber) =>{
-        setPage(pageNumber)
+        dispatch(currentPage(pageNumber))
    }
 
     return(
@@ -33,15 +34,17 @@ export default function Home(){
             <h1>Home</h1>
             <NavBar/>
             <Link to='/create'><button>Create new dog</button></Link>
-            <Paginated allDogs={allDogs.length} dogsPerPage = {dogsPerPage} pag = {pag} />
             <h3>filter by:{filters}</h3>
             {currentDogs.map(el =>{
                 return(
-                    <div>
-                        <p>{el.name}</p>
-                        <p>{el.weight}</p>
-                        <img src={el.image} alt="no imagen" />
-                    </div>
+                    <Link to={`/dogs/${el.id}`}>
+                    <Card 
+                    dog={el.name}
+                    weight = {el.weight}
+                    temperament = {el.temperament}
+                    image = {el.image}
+                    />
+                    </Link>
                 )
             })}
             <Paginated 

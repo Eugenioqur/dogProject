@@ -1,10 +1,12 @@
-import { FILTER_CREATED, FILTER_SORT, FILTER_TEMPERAMENT, GET_ALL_DOGS, GET_ALL_TEMPERAMENTS, SEARCH_DOGS } from "../constant"
+import { CLEAR_DOG, CURRENT_PAGE, FILTER_CREATED, FILTER_SORT, FILTER_TEMPERAMENT, GET_ALL_DOGS, GET_ALL_TEMPERAMENTS, GET_DOG, SEARCH_DOGS } from "../constant"
 
 const initialState={
     dogs:[],
     allDogs:[],
+    dog:[],
     temperaments:[],
-    filter:''
+    filter:'',
+    page: 1
 }
 
 const rootReducer=(state=initialState,action)=>{
@@ -61,7 +63,8 @@ const rootReducer=(state=initialState,action)=>{
             return{
                 ...state,
                 dogs: sortedArr,
-                filter: action.payload
+                filter: action.payload,
+                page: 1
             }
 
         case FILTER_TEMPERAMENT:
@@ -79,12 +82,14 @@ const rootReducer=(state=initialState,action)=>{
             if(dogsFiltered.length){
                 return{
                     ...state,
-                    dogs : dogsFiltered
+                    dogs : dogsFiltered,
+                    page: 1
                 }
             } else{
                 return{
                     ...state,
-                    dogs: dogs
+                    dogs: dogs,
+                    page: 1
                 }
             }
         
@@ -95,13 +100,15 @@ const rootReducer=(state=initialState,action)=>{
                     const dogsFromApi = state.allDogs.filter((el)=> typeof el.id === 'number')
                     return{
                         ...state,
-                        dogs: dogsFromApi
+                        dogs: dogsFromApi,
+                        page: 1
                     }
                 case 'db':
                     const dogsFromDb = state.allDogs.filter((el)=> typeof el.id === 'string')
                     return{
                         ...state,
-                        dogs: dogsFromDb
+                        dogs: dogsFromDb,
+                        page: 1
                     }
                     
                 default:
@@ -111,9 +118,28 @@ const rootReducer=(state=initialState,action)=>{
         case SEARCH_DOGS:
             return{
                 ...state,
-                dogs: action.payload
+                dogs: action.payload,
+                page: 1
             }
         
+        case CURRENT_PAGE:
+            return{
+                ...state,
+                page: action.payload
+            }
+
+        case GET_DOG:
+            return{
+                ...state,
+                dog: action.payload
+            }
+
+        case CLEAR_DOG:
+            return{
+                ...state,
+                dog:[]
+            }
+
         default:
             return state
     }

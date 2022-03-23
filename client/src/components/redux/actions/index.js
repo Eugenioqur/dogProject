@@ -1,4 +1,4 @@
-import { FILTER_CREATED, FILTER_SORT, FILTER_TEMPERAMENT, GET_ALL_DOGS, GET_ALL_TEMPERAMENTS, SEARCH_DOGS } from "../constant";
+import { CLEAR_DOG, CURRENT_PAGE, FILTER_CREATED, FILTER_SORT, FILTER_TEMPERAMENT, GET_ALL_DOGS, GET_ALL_TEMPERAMENTS, GET_DOG, SEARCH_DOGS } from "../constant";
 import axios from 'axios'
 
 export function getAllDogs(){
@@ -55,4 +55,27 @@ export function getDogSearch(name){
         }
     }
     
+}
+
+export function currentPage(payload){
+    return({
+        type: CURRENT_PAGE,
+        payload
+    })
+}
+
+export function getDog(id){
+    return async function(dispatch){
+        let json = await axios(`http://localhost:3001/dogs/${id}`,{});
+        return dispatch({
+            type: GET_DOG,
+            payload: json.data
+        })
+    }
+}
+
+export function clearDog(){
+    return({
+        type: CLEAR_DOG,
+    })
 }
