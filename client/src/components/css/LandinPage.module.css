@@ -1,0 +1,53 @@
+body{
+    background-color:  #dfdfdf
+    ;
+    margin:0;
+	padding:0;
+}
+
+.body{
+    background-origin:margin-box;
+    margin: 0%;
+    padding: 0%;
+    background-image: url('../images/landin.png');
+    background-color: #5a5454; 
+    min-width: 100%;
+    min-height: 100vh ;
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover;
+
+}
+.conteiner{
+    margin-right: 1px;
+    background-color:  #f8a563;
+    font-family: fantasy;
+    font-size: 38px;
+    height: 100vh;
+    width: 430px;
+    position: absolute;
+
+}
+.text{
+    margin-left: 2rem;
+    color: #f2f3f4
+}
+
+.button {
+    border: 1px solid #e8511f;
+    border-radius: 5px;
+    background: #e8511f;
+    color: #f2f3f4;
+    padding: 10px;
+    padding-right: 14px;
+    padding-left: 12px;
+    font-family: fantasy;
+    font-size: 17px;
+    margin-left: 2rem
+}
+   
+.button:hover {
+    background-color: #1abc9c;
+    color: white;
+    border: 1px solid  #1abc9c;
+}

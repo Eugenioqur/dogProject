@@ -5,7 +5,7 @@ const initialState={
     allDogs:[],
     dog:[],
     temperaments:[],
-    filter:'',
+    filter:'A-Z',
     page: 1
 }
 
@@ -26,7 +26,7 @@ const rootReducer=(state=initialState,action)=>{
                 }
                 
         case FILTER_SORT:
-            let sortedArr = action.payload === 'az' ? state.allDogs.sort(function(a,b){
+            let sortedArr = action.payload === 'A-Z' ? state.allDogs.sort(function(a,b){
                 if (a.name>  b.name){
                     return 1
                 }
@@ -34,7 +34,7 @@ const rootReducer=(state=initialState,action)=>{
                     return -1
                 }
                 return 0
-            }): action.payload === 'za' ? state.allDogs.sort(function(a,b){
+            }): action.payload === 'Z-A' ? state.allDogs.sort(function(a,b){
                 if(a.name < b.name){
                     return 1
                 }
@@ -42,7 +42,7 @@ const rootReducer=(state=initialState,action)=>{
                     return -1
                 }
                 return 0
-            }) : action.payload === 'asc' ? state.allDogs.sort(function(a,b){
+            }) : action.payload === 'Ascendant' ? state.allDogs.sort(function(a,b){
                 if(a.weight > b.weight){
                     return 1
                 } 
@@ -50,11 +50,11 @@ const rootReducer=(state=initialState,action)=>{
                     return -1
                 }
                 return 0
-            }) : action.payload ==='des' ? state.allDogs.sort(function(a,b){
-                if (a.weight < b.weight){
+            }) : action.payload ==='Downward' ? state.allDogs.sort(function(a,b){
+                if (a.weight.slice(-2) < b.weight.slice(-2)){
                     return 1
                 }
-                if (a.weight > b.weight){
+                if (a.weight.slice(-2) > b.weight.slice(-2)){
                     return -1
                 }
                 return 0
@@ -83,13 +83,15 @@ const rootReducer=(state=initialState,action)=>{
                 return{
                     ...state,
                     dogs : dogsFiltered,
-                    page: 1
+                    page: 1,
+                    filter: action.payload
                 }
             } else{
                 return{
                     ...state,
                     dogs: dogs,
-                    page: 1
+                    page: 1,
+                    filter: action.payload
                 }
             }
         
@@ -101,14 +103,16 @@ const rootReducer=(state=initialState,action)=>{
                     return{
                         ...state,
                         dogs: dogsFromApi,
-                        page: 1
+                        page: 1,
+                        filter: 'Created from api'
                     }
                 case 'db':
                     const dogsFromDb = state.allDogs.filter((el)=> typeof el.id === 'string')
                     return{
                         ...state,
                         dogs: dogsFromDb,
-                        page: 1
+                        page: 1,
+                        filter: 'Created from db'
                     }
                     
                 default:

@@ -1,5 +1,7 @@
 import React from "react";
 
+import s from './css/Paginated.module.css'
+
 export default function Paginated({allDogs,dogsPerPage,pag}){
     let numbers = []
 
@@ -9,11 +11,11 @@ export default function Paginated({allDogs,dogsPerPage,pag}){
 
     return(
         <div>
-            <ul>
+            <ul className={s.cont}>
                 {
                     numbers.map(n=>(
-                        <li key ={n}>
-                            <button  onClick={()=> pag(n)}>{n}</button>
+                        <li className={s.list} key ={n}>
+                            <button className={s.button}  onClick={()=> pag(n)}>{n}</button>
                         </li>
                     ))
                 }

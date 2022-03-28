@@ -1,0 +1,17 @@
+.grid{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 20% 20% 20% 20% 20%;
+    margin-left: 1.5em;
+    
+}
+
+.card{
+    text-decoration: none;
+}
+
+.filter{
+    color:  #777777;
+    margin-left: 2.5em;
+ 
+}

@@ -1,0 +1,45 @@
+.conteiner{
+    margin: 15px;
+    border-radius: 10px;
+    border: 1px;
+    border-style: solid ;
+    border-color: #1abc9c  ;
+    width : 600px;  
+
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+    text-decoration: none;
+}
+.image{
+border-radius: 10px;
+width: 500px;
+}
+
+.conteiner{
+  background-color: #f2f3f4;
+ }
+
+.conteiner:hover{
+ background-color: #e5e7e9;
+}
+
+
+.name{
+  color: black;
+}
+
+.text{
+  color: #1abc9c;
+  margin-left:0.5em;
+  display: flex;  
+  flex-direction: column;
+  align-items: center;
+  font-family: fantasy;
+  text-decoration: none;
+}
+
+.line{
+  width: 50%;
+}
+

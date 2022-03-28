@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import {useEffect} from 'react'
 import {useDispatch,useSelector} from 'react-redux'
 
@@ -8,6 +8,8 @@ import { currentPage, getAllDogs } from "./redux/actions";
 import NavBar from "./NavBar";
 import Paginated from "./Paginated";
 import Card from "./Card";
+
+import s from './css/Home.module.css'
 
 export default function Home(){
 
@@ -31,22 +33,22 @@ export default function Home(){
 
     return(
         <div>
-            <h1>Home</h1>
             <NavBar/>
-            <Link to='/create'><button>Create new dog</button></Link>
-            <h3>filter by:{filters}</h3>
-            {currentDogs.map(el =>{
-                return(
-                    <Link to={`/dogs/${el.id}`}>
-                    <Card 
-                    dog={el.name}
-                    weight = {el.weight}
-                    temperament = {el.temperament}
-                    image = {el.image}
-                    />
-                    </Link>
-                )
-            })}
+            <h3 className={s.filter}>filter by: {filters}</h3>
+            <div className={s.grid}>
+                {currentDogs.map(el =>{
+                    return(
+                        <NavLink className={s.card} to={`/dogs/${el.id}`}>
+                        <Card 
+                        dog={el.name}
+                        weight = {el.weight}
+                        temperament = {el.temperament}
+                        image = {el.image}
+                        />
+                        </NavLink>
+                    )
+                })}
+            </div>
             <Paginated 
             allDogs={allDogs.length} 
             dogsPerPage={dogsPerPage} 
