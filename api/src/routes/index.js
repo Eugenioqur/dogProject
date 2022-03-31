@@ -11,6 +11,8 @@ const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
+dogs = axios.get('https://api.thedogapi.com/v1/breeds');
+
 
 const getApiInfo = async() =>{
     const dogs = await axios.get('https://api.thedogapi.com/v1/breeds');
@@ -128,5 +130,6 @@ router.post('/dog', async(req,res)=>{
     dog.addTemperament(temperaments)
     res.send(dog)
 })
+
 
 module.exports = router;

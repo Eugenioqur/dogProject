@@ -2,12 +2,13 @@ import { CLEAR_DOG, CURRENT_PAGE, FILTER_CREATED, FILTER_SORT, FILTER_TEMPERAMEN
 import axios from 'axios'
 
 export function getAllDogs(){
-    return async function(dispatch){
-        let json = await axios ('http://localhost:3001/dogs',{});
-        return dispatch({
-            type:GET_ALL_DOGS,
-            payload: json.data
-        })
+    return function(dispatch){
+        axios ('http://localhost:3001/dogs',{}).then((json)=>{
+            return dispatch({
+                type:GET_ALL_DOGS,
+                payload: json.data
+            })
+        });
     }
 }
 
@@ -52,6 +53,10 @@ export function getDogSearch(name){
             })
         } catch (error){
             console.log(error)
+            return dispatch({
+                type:SEARCH_DOGS,
+                payload:[{errors:name}]
+            })
         }
     }
     
@@ -78,4 +83,11 @@ export function clearDog(){
     return({
         type: CLEAR_DOG,
     })
+}
+
+export function postDog(payload){
+    return async function(dispatch){
+        const dog = await axios.post('http://localhost:3001/dog',payload)
+        return dog
+    }
 }

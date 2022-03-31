@@ -16,7 +16,8 @@ const rootReducer=(state=initialState,action)=>{
             return {
                 ...state,
                 dogs:  action.payload,
-                allDogs: action.payload
+                allDogs: action.payload,
+                filter:'A-Z'
             }
 
         case GET_ALL_TEMPERAMENTS:
@@ -26,7 +27,7 @@ const rootReducer=(state=initialState,action)=>{
                 }
                 
         case FILTER_SORT:
-            let sortedArr = action.payload === 'A-Z' ? state.allDogs.sort(function(a,b){
+            let sortedArr = action.payload === 'A-Z' ? state.dogs.sort(function(a,b){
                 if (a.name>  b.name){
                     return 1
                 }
@@ -34,7 +35,7 @@ const rootReducer=(state=initialState,action)=>{
                     return -1
                 }
                 return 0
-            }): action.payload === 'Z-A' ? state.allDogs.sort(function(a,b){
+            }): action.payload === 'Z-A' ? state.dogs.sort(function(a,b){
                 if(a.name < b.name){
                     return 1
                 }
@@ -42,7 +43,7 @@ const rootReducer=(state=initialState,action)=>{
                     return -1
                 }
                 return 0
-            }) : action.payload === 'Ascendant' ? state.allDogs.sort(function(a,b){
+            }) : action.payload === 'Ascendant' ? state.dogs.sort(function(a,b){
                 if(a.weight > b.weight){
                     return 1
                 } 
@@ -50,7 +51,7 @@ const rootReducer=(state=initialState,action)=>{
                     return -1
                 }
                 return 0
-            }) : action.payload ==='Downward' ? state.allDogs.sort(function(a,b){
+            }) : action.payload ==='Downward' ? state.dogs.sort(function(a,b){
                 if (a.weight.slice(-2) < b.weight.slice(-2)){
                     return 1
                 }
@@ -58,7 +59,7 @@ const rootReducer=(state=initialState,action)=>{
                     return -1
                 }
                 return 0
-            }) : state.allDogs
+            }) : state.dogs
             
             return{
                 ...state,

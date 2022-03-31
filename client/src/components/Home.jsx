@@ -34,9 +34,9 @@ export default function Home(){
     return(
         <div>
             <NavBar/>
-            <h3 className={s.filter}>filter by: {filters}</h3>
+            <h3 className={s.filter}>Filter by: {filters}</h3>
             <div className={s.grid}>
-                {currentDogs.map(el =>{
+                {currentDogs[0] && currentDogs[0].errors !== undefined ? (<h1>No results for: {currentDogs[0].errors}</h1>) : currentDogs.map(el =>{
                     return(
                         <NavLink className={s.card} to={`/dogs/${el.id}`}>
                         <Card 
@@ -52,7 +52,9 @@ export default function Home(){
             <Paginated 
             allDogs={allDogs.length} 
             dogsPerPage={dogsPerPage} 
-            pag={pag} />
+            pag={pag}
+            page={page}
+            />
         </div>
     )
 }
